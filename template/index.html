@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SuperMarket</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="navbar">
+				<img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+				<nav>
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Services</a></li>
+						<li><a href="login">login</a></li>
+					</ul>
+				</nav>
+				<img src="{{ url_for('static', filename='user.png') }}" class="user-icon">
+			</div>
+
+			<div class="content">
+				<h1><span>Super-Market</span></h1>
+				<p>Bring Home the Super Market Experience...!</p>
+
+				<div class="btn-box">
+					<button type="button">Explore</button>
+				</div>
+			</div>
+		</div>
+		<div class="side-bar">
+			<img src="{{ url_for('static', filename='icon.png') }}" class="logo-icon">
+			<div class="social">
+				<img src="{{ url_for('static', filename='fb.png') }}">
+				<img src="{{ url_for('static', filename='ig.png') }}">
+				<img src="{{ url_for('static', filename='tw.png') }}">
+			</div>
+
+</body>
+
+</html>

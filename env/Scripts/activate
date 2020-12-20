@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="E:\Academics\5 SEM\DBMS lab\Mini project\env"
+VIRTUAL_ENV="E:\Academics\5 SEM\DBMS lab\supermarket mini project\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

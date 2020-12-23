@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SuperMarket Home</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			font-family: sans-serif;
+		}
+		.container
+		{
+			width: 100%;
+			height: 100vh;
+			background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
+			url("{{ url_for('static', filename='images/bck.png') }}");
+			background-position: center;
+			background-size: cover;
+			padding-left: 8%;
+			padding-right: 8%;
+			box-sizing: border-box;
+		}
+		.navbar
+		{
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 25px, 0;
+		}
+		nav
+		{
+			flex: 1;
+			text-align: right;  
+		}
+		.logo
+		{
+			width: 120px;
+			cursor: pointer;
+		}
+		.user-icon
+		{
+			width: 30px;
+			border-radius: 50%;
+			cursor: pointer; 
+		}
+		nav ul li
+		{
+			display: inline-block;
+			list-style: none;
+			margin-right: 30px;
+		}
+		nav ul li a
+		{
+			text-decoration: none;
+			color: #fff;
+			font-size: 13px;
+			padding: 5px 2px;
+		}
+		nav ul li a:hover
+		{
+			border-bottom: 1px solid #ff6b3f; 
+		}
+		.row
+		{
+			display: flex;
+			color: #fff;
+			align-items: center;
+			height: 88%;
+		}
+		.col
+		{
+			flex-basis: 50%;
+		}
+		h1
+		{
+			font-size: 60px;
+			line-height: 70px;
+			letter-spacing: 1px;
+			margin: 15px 0;
+		}
+		p
+		{
+			font-size: 15px;
+			line-height: 22px;
+		}
+		.btn-box
+		{
+			margin-top: 20px;
+		}
+		button
+		{
+			width: 150px;
+			border: 1px solid #ff6b3f;
+			color: #fff;
+			padding: 10px;
+			margin-right: 10px;
+			border-radius: 25px;
+			cursor: pointer;
+			background: #ff6b3f;
+
+		}
+		button:hover
+		{
+			background: transparent;
+		}
+		.card
+		{
+			width: 200px;
+			height: 230px;
+			display: inline-block;
+			border-radius: 10px;
+			padding: 15px 25px;
+			box-sizing: border-box;
+			cursor: pointer;
+			margin: 10px 15px;
+			color: #fff;
+			background-position: center;
+			background-size: cover;
+			transition:transform 0.5s;
+		}
+		h5
+		{
+			color: #000;
+			text-shadow: 0 0 5px #999;
+		}
+		.card1
+		{
+			background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url("{{ url_for('static', filename='images/prevshop.jpg') }}");
+		}
+		.card2
+		{
+			background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url("{{ url_for('static', filename='images/shoplogo.jpg') }}");
+		}
+		.card:hover
+		{
+			transform: translateY(-15px);
+		}
+
+	</style>
+</head>
+<body>		
+		<div class="container">
+			<div class="navbar">
+				<img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+					<nav>
+						<ul>
+							<li><a href="#">Home</a></li>
+							<li><a href="#">Services</a></li>
+							<li><a href="#">Contact Us</a></li>
+						</ul>
+					</nav>
+				<img src="{{ url_for('static', filename='images/user.png') }}" class="user-icon">	    </div>
+				
+					{% with messages = get_flashed_messages(with_categories=true) %}
+						{% for category, message in messages %}
+							<div class="flashes {{ category }}">{{ message }}</div>
+						{% endfor %}
+					{% endwith %}
+
+			<div class="row">
+				<div class="col">
+					<h1><span>Super-Market</span></h1>
+				<p>Bring Home the Super Market Experience...!</p>
+					<div class="btn-box">
+						<button type="button">Explore</button>
+			    	</div>
+				</div>
+				<div class="col">
+					<a href="{{url_for('shop')}}">
+						<div class="card card1">
+							<h5>Go-Shop</h5>
+						</div>
+					</a>
+					<a href="{{url_for('previous_cart')}}"></a>
+						<div class="card card2">
+							<h5>Go-OLD</h5>
+						</div>
+					</a>
+				</div>
+			</div>	
+
+</body>
+</html>

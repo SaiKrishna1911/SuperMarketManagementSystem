@@ -4,8 +4,8 @@
 <meta content="IE-edge" http-equiv="X-UA-Compatible">
 <meta content="width=device-width, intial-scale=1.0" name="viewport">
 <title>Shopping Website</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" href="css/lightslider.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/shop/css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='/shop/css/lightslider.css') }}">
 <script src="js/Jquery.js"></script>
 <script src="js/lightslider.js"></script>
 <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js"></script>
@@ -13,7 +13,7 @@
   src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
 <!--fav-icon---------------->
-<link rel="shortcut icon" href="images/fav-icon.png"/>
+<link rel="shortcut icon" href="{{ url_for('static', filename='/shop/images/fav-icon.png') }}"/>
 	<!--style----->
 	<style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -43,7 +43,7 @@
     <!--menu-bar----------------------------------------->
     <div class="navigation">
         <!--logo------------>
-        <a href="#" class="logo"><img src="images/logo.png"></a>
+        <a href="#" class="logo"><img src="{{ url_for('static', filename='/shop/images/logo.png') }}"></a>
         <!--menu-icon------------->
         <div class="toggle"></div>
         <!--menu----------------->
@@ -145,7 +145,7 @@
             <li class="item">
                 <div class="feature-box">
                     <a href="#">
-                        <img src="images/feature_1.jpg">
+                        <img src="{{ url_for('static', filename='/shop/images/feature_1.jpg') }}">
                     </a>
                 </div>
                 <span>Snacks</span>
@@ -154,7 +154,7 @@
             <li class="item">
                 <div class="feature-box">
                     <a href="#">
-                        <img src="images/feature_2.jpg">
+                        <img src="{{ url_for('static', filename='/shop/images/feature_2.jpg') }}">
                     </a>
                 </div>
                 <span>Healthy foods</span>
@@ -163,7 +163,7 @@
             <li class="item">
                 <div class="feature-box">
                     <a href="#">
-                        <img src="images/feature_3.jpg">
+                        <img src="{{ url_for('static', filename='/shop/images/feature_3.jpg') }}">
                     </a>
                 </div>
                 <span>Flour</span>
@@ -172,7 +172,7 @@
             <li class="item">
                 <div class="feature-box">
                     <a href="#">
-                        <img src="images/feature_4.jpg">
+                        <img src="{{ url_for('static', filename='/shop/images/feature_4.jpg') }}">
                     </a>
                 </div>
                 <span>Beverages</span>
@@ -181,7 +181,7 @@
             <li class="item">
                 <div class="feature-box">
                     <a href="#">
-                        <img src="images/feature_5.jpg">
+                        <img src="{{ url_for('static', filename='/shop/images/feature_5.jpg') }}">
                     </a>
                 </div>
                 <span>Fruits</span>
@@ -190,7 +190,7 @@
             <li class="item">
                 <div class="feature-box">
                     <a href="#">
-                        <img src="images/feature_6.jpg">
+                        <img src="{{ url_for('static', filename='/shop/images/feature_6.jpg') }}">
                     </a>
                 </div>
                 <span>Vegetables</span>
@@ -217,7 +217,7 @@
                               <i class="fas fa-shopping-cart"></i>
                             </a>
                           <!--img------>
-                        <img src="images/apple.jpg">
+                        <img src="{{ url_for('static', filename='/shop/images/apple.jpg') }}">
                       </div>
                       <!--product-details-------->
                       <div class="product-details">
@@ -232,7 +232,7 @@
                             <!--add-cart---->
                           <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                           <!--img------>
-                          <img src="images/banana.jfif">
+                          <img src="{{ url_for('static', filename='/shop/images/banana.jfif') }}">
                         </div>
                         <!--product-details-------->
                         <div class="product-details">
@@ -247,7 +247,7 @@
                         <!--add-cart---->
                         <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                         <!--img------>
-                      <img src="images/cuc.jfif">
+                      <img src="{{ url_for('static', filename='/shop/images/cuc.jfif') }}">
                     </div>
                     <!--product-details-------->
                     <div class="product-details">
@@ -262,7 +262,7 @@
                         <!--add-cart---->
                         <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                         <!--img------>
-                      <img src="images/et.jfif">
+                      <img src="{{ url_for('static', filename='/shop/images/et.jfif') }}">
                     </div>
                     <!--product-details-------->
                     <div class="product-details">
@@ -277,7 +277,7 @@
                         <!--add-cart---->
                         <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                         <!--img------>
-                      <img src="images/lf.jfif">
+                      <img src="{{ url_for('static', filename='/shop/images/lf.jfif') }}">
                     </div>
                     <!--product-details-------->
                     <div class="product-details">
@@ -292,7 +292,7 @@
                         <!--add-cart---->
                         <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                         <!--img------>
-                      <img src="images/maggie.png">
+                      <img src="{{ url_for('static', filename='/shop/images/maggie.png') }}">
                     </div>
                     <!--product-details-------->
                     <div class="product-details">
@@ -307,7 +307,7 @@
                         <!--add-cart---->
                         <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                         <!--img------>
-                      <img src="images/tata.jfif">
+                      <img src="{{ url_for('static', filename='/shop/images/tata.jfif') }}">
                     </div>
                     <!--product-details-------->
                     <div class="product-details">
@@ -324,7 +324,7 @@
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                         <!--img------>
-                      <img src="images/mul.jfif">
+                      <img src="{{ url_for('static', filename='/shop/images/mul.jfif') }}">
                     </div>
                     <!--product-details-------->
                     <div class="product-details">
@@ -339,7 +339,7 @@
           <section class="sale">
               <!--sale-box-1-------------------->
               <div class="sale-box sale-1">
-                  <img src="images/sale-1.jpg">
+                  <img src="{{ url_for('static', filename='/shop/images/sale-1.jpg') }}">
                   
                   <a href="#">
                   <div class="sale-text">
@@ -350,7 +350,7 @@
                 </div>
                  <!--sale-box-2-------------------->
               <div class="sale-box sale-1">
-                <img src="images/sale-2.jpg">
+                <img src="{{ url_for('static', filename='/shop/images/sale-2.jpg') }}">
                 
                 <a href="#"><div class="sale-text">
                   <strong>Hello Summer</strong>
@@ -360,7 +360,7 @@
               </div>
                <!--sale-box-3-------------------->
                <div class="sale-box sale-1">
-                <img src="images/sale-3.jpg">
+                <img src="{{ url_for('static', filename='/shop/images/sale-3.jpg') }}">
                 
                 <a href="#">
                 <div class="sale-text">
@@ -389,7 +389,7 @@
                         <!--add-cart---->
                         <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                         <!--img------>
-                      <img src="images/tata.jfif">
+                      <img src="{{ url_for('static', filename='/shop/images/tata.jfif') }}">
                     </div>
                     <!--product-details-------->
                     <div class="product-details">
@@ -404,7 +404,7 @@
                         <!--add-cart---->
                         <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                         <!--img------>
-                      <img src="images/tata.jfif">
+                      <img src="{{ url_for('static', filename='/shop/images/tata.jfif') }}">
                     </div>
                     <!--product-details-------->
                     <div class="product-details">
@@ -419,7 +419,7 @@
                         <!--add-cart---->
                         <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                         <!--img------>
-                      <img src="images/tata.jfif">
+                      <img src="{{ url_for('static', filename='/shop/images/tata.jfif') }}">
                     </div>
                     <!--product-details-------->
                     <div class="product-details">
@@ -434,7 +434,7 @@
                         <!--add-cart---->
                         <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                         <!--img------>
-                      <img src="images/tata.jfif">
+                      <img src="{{ url_for('static', filename='/shop/images/tata.jfif') }}">
                     </div>
                     <!--product-details-------->
                     <div class="product-details">

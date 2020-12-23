@@ -145,9 +145,9 @@
 				<img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
 					<nav>
 						<ul>
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="#">Contact Us</a></li>
+							<li><a href="{{url_for('home')}}">Home</a></li>
+							<li><a href="{{url_for('explore')}}">Services</a></li>
+							<li><a href="{{url_for('contact_us')}}">Contact Us</a></li>
 						</ul>
 					</nav>
 				<img src="{{ url_for('static', filename='images/user.png') }}" class="user-icon">	    </div>
@@ -163,7 +163,7 @@
 					<h1><span>Super-Market</span></h1>
 				<p>Bring Home the Super Market Experience...!</p>
 					<div class="btn-box">
-						<button type="button">Explore</button>
+						<button type="button" formaction = "{{url_for('explore')}}">Explore</button>
 			    	</div>
 				</div>
 				<div class="col">

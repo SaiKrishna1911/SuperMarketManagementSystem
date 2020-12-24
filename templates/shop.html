@@ -207,8 +207,8 @@
             </div>
               <!--products----------------------->
               <div class="product-container">
-                  
-                <!--product-box-1---------->
+                {% for item in items %}
+                    <!--product-box-1---------->
                   <div class="product-box">
                       <!--product-img------------>
                       <div class="product-img">
@@ -217,121 +217,16 @@
                               <i class="fas fa-shopping-cart"></i>
                             </a>
                           <!--img------>
-                        <img src="{{ url_for('static', filename='/shop/images/apple.jpg') }}">
+                        <img src="{{ url_for('static', filename='/uploads/{}.png'.format(item['id'])) }}">
                       </div>
                       <!--product-details-------->
                       <div class="product-details">
-                          <a href="#" class="p-name">Apples</a>
-                          <span class="p-price">Rs.100</span>
+                          <a href="#" class="p-name">{{item['name']}}</a>
+                          <span class="p-price">{{item["sale_rate"]}}</span>
                       </div>
                   </div>
-                    <!--product-box-2---------->
-                    <div class="product-box">
-                        <!--product-img------------>
-                        <div class="product-img">
-                            <!--add-cart---->
-                          <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                          <!--img------>
-                          <img src="{{ url_for('static', filename='/shop/images/banana.jfif') }}">
-                        </div>
-                        <!--product-details-------->
-                        <div class="product-details">
-                            <a href="#" class="p-name">Bananas</a>
-                            <span class="p-price">Rs.100</span>
-                        </div>
-                    </div>
-                  <!--product-box-3---------->
-                  <div class="product-box">
-                    <!--product-img------------>
-                    <div class="product-img">
-                        <!--add-cart---->
-                        <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                        <!--img------>
-                      <img src="{{ url_for('static', filename='/shop/images/cuc.jfif') }}">
-                    </div>
-                    <!--product-details-------->
-                    <div class="product-details">
-                        <a href="#" class="p-name">Cucumbers</a>
-                        <span class="p-price">Rs.100</span>
-                    </div>
-                </div>
-                  <!--product-box-4---------->
-                  <div class="product-box">
-                    <!--product-img------------>
-                    <div class="product-img">
-                        <!--add-cart---->
-                        <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                        <!--img------>
-                      <img src="{{ url_for('static', filename='/shop/images/et.jfif') }}">
-                    </div>
-                    <!--product-details-------->
-                    <div class="product-details">
-                        <a href="#" class="p-name">Everest Thikalal</a>
-                        <span class="p-price">Rs.100</span>
-                    </div>
-                </div>
-                  <!--product-box-5---------->
-                  <div class="product-box">
-                    <!--product-img------------>
-                    <div class="product-img">
-                        <!--add-cart---->
-                        <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                        <!--img------>
-                      <img src="{{ url_for('static', filename='/shop/images/lf.jfif') }}">
-                    </div>
-                    <!--product-details-------->
-                    <div class="product-details">
-                        <a href="#" class="p-name">Okra</a>
-                        <span class="p-price">Rs.100</span>
-                    </div>
-                </div>
-                  <!--product-box-6---------->
-                  <div class="product-box">
-                    <!--product-img------------>
-                    <div class="product-img">
-                        <!--add-cart---->
-                        <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                        <!--img------>
-                      <img src="{{ url_for('static', filename='/shop/images/maggie.png') }}">
-                    </div>
-                    <!--product-details-------->
-                    <div class="product-details">
-                        <a href="#" class="p-name">Maggie Instant noodles</a>
-                        <span class="p-price">Rs.100</span>
-                    </div>
-                </div>
-                  <!--product-box-7---------->
-                  <div class="product-box">
-                    <!--product-img------------>
-                    <div class="product-img">
-                        <!--add-cart---->
-                        <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
-                        <!--img------>
-                      <img src="{{ url_for('static', filename='/shop/images/tata.jfif') }}">
-                    </div>
-                    <!--product-details-------->
-                    <div class="product-details">
-                        <a href="#" class="p-name">Tata Salt</a>
-                        <span class="p-price">Rs.100</span>
-                    </div>
-                </div>
-                  <!--product-box-8---------->
-                  <div class="product-box">
-                    <!--product-img------------>
-                    <div class="product-img">
-                        <!--add-cart---->
-                        <a href="#" class="add-cart">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
-                        <!--img------>
-                      <img src="{{ url_for('static', filename='/shop/images/mul.jfif') }}">
-                    </div>
-                    <!--product-details-------->
-                    <div class="product-details">
-                        <a href="#" class="p-name">Aashirvaad Multigrain Atta</a>
-                        <span class="p-price">Rs.100</span>
-                    </div>
-                </div>
+                {% endfor %}
+                    
               </div>
           </section>
 

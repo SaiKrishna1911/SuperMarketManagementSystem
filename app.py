@@ -9,7 +9,7 @@ from werkzeug.local import LocalProxy
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = "enSecretGuru"
-app.config['UPLOAD_FOLDER'] = "./uploads"
+app.config['UPLOAD_FOLDER'] = "./static/uploads"
 app.permanent_session_lifetime = timedelta(days=3)
 
 
@@ -98,6 +98,34 @@ def login():
         return render_template("login.html")
 
 
+@app.route("/profile_edit", methods=['GET', 'POST'])
+@login_required
+def profile_edit():
+    if request.method == 'POST':
+        old_password = request.form.get('old_password')
+        cur.execute(
+            f"""SELECT password FROM Users WHERE email = '{session["email"]}';""")
+        if check_password_hash(cur.fetchone()['password'], old_password):
+            name = request.form.get('name')
+            email = request.form.get('email')
+            new_password = generate_password_hash(
+                request.form.get('new_password'))
+            phone = request.form.get('phone')
+            address = request.form.get('address')
+            cur.execute(
+                f"""
+                UPDATE Users
+                SET  name='{name}', email='{email}', password='{new_password}', phone='{phone}', address='{address}'
+                WHERE email='{email}'
+                """
+            )
+            flash("Changes applied Successfully")
+            redirect(url_for('home'))
+        else:
+            flash("Incorrect current password", "error")
+    return render_template("profile_edit.html")
+
+
 @app.route("/home")
 @login_required
 def home():
@@ -112,9 +140,11 @@ def home_admin():
     return render_template("home_admin.html")
 
 
-@app.route("/shop")
+@app.route("/shop", methods=['GET', 'POST'])
 def shop():
-    return render_template("shop.html")
+    cur.execute("SELECT * from Items")
+    items = cur.fetchall()
+    return render_template("shop.html", items=items)
 
 
 @app.route("/previous_cart")
@@ -135,7 +165,7 @@ def admin():
 
 
 @app.route("/admin/add_item", methods=['GET', 'POST'])
-# @admin_login_required
+@admin_login_required
 def add_item():
     cur.execute("SELECT category FROM Categories ORDER BY category;")
     categories = cur.fetchall()
@@ -175,6 +205,18 @@ def add_item():
                            "/" + f"{item_id}.png")
 
     return render_template("add_item.html", categories=categories, brands=brands)
+
+
+@app.route("/contact_us")
+def contact_us():
+    return render_template("contact_us.html")
+
+
+@ app.route("/logout")
+def logout():
+    flash(f"{session['user']} have been logged out successfully")
+    clear_session()
+    return redirect(url_for('index'))
 
 
 @ app.route("/clearsession")

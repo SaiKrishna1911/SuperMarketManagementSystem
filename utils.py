@@ -6,7 +6,7 @@ from flask import g, request, redirect, url_for, session, flash
 def dbConnection():
     connection = pymysql.connect(
         host="akshayvn.heliohost.us",
-        user="akshayvn_super",
+        user="akshayvn_avnayak",
         password="dbmsmini",
         database="akshayvn_dbms_mini_project",
         charset='utf8mb4',
@@ -16,7 +16,7 @@ def dbConnection():
     return connection
 
 
-def login_required(f):
+def admin_login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session['email'] != 'admin@abc':
@@ -26,7 +26,7 @@ def login_required(f):
     return decorated_function
 
 
-def admin_login_required(f):
+def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if "user" not in session:

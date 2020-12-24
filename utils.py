@@ -6,7 +6,7 @@ from flask import g, request, redirect, url_for, session, flash
 def dbConnection():
     connection = pymysql.connect(
         host="akshayvn.heliohost.us",
-        user="akshayvn_super",
+        user="akshayvn_avnayak",
         password="dbmsmini",
         database="akshayvn_dbms_mini_project",
         charset='utf8mb4',

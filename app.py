@@ -187,10 +187,10 @@ def add_item():
             if category == 'Other':
                 category = request.form['new_category']
                 cur.execute(
-                    f"INSERT INTO Categories(category) VALUES({category})")
+                    f"INSERT INTO Categories(category) VALUES('{category}');")
             if brand == 'Other':
                 brand = request.form['new_brand']
-                cur.execute(f"INSERT INTO Brands(brand) VALUES({brand})")
+                cur.execute(f"INSERT INTO Brands(brand) VALUES('{brand}');")
             cur.execute(
                 f"""
                 INSERT INTO Items (categoryId,brandId,name,mrp,sale_rate)

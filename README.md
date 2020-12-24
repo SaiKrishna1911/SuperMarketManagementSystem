@@ -8,4 +8,5 @@ Supermarket management system
 
 ## To run the app
 Run the code in terminal in the same location
+
 ```python app.py```

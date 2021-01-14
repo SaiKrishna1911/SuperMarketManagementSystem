@@ -67,7 +67,7 @@
             </a>
             <a href="#">
                 <i class="fas fa-shopping-cart">
-                    <span class="num-cart-product">0</span>
+                    <span class="num-cart-product">{{cartsize}}</span>
                 </i>
             </a>
         </div>
@@ -213,8 +213,8 @@
                       <!--product-img------------>
                       <div class="product-img">
                           <!--add-cart---->
-                          <a href="#" class="add-cart">
-                              <i class="fas fa-shopping-cart"></i>
+                            <a href="{{url_for('shop', addedItem = item['id'])}}" class="add-cart">
+                              <i class="fas fa-shopping-cart">{{item['quantity']}}</i>
                             </a>
                           <!--img------>
                         <img src="{{ url_for('static', filename='/uploads/{}.png'.format(item['id'])) }}">

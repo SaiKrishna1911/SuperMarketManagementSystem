@@ -155,7 +155,7 @@
 				<nav>
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Services</a></li>
+						<li><a href="{{url_for('explore')}}">Services</a></li>
 						<li><a href="{{url_for('login')}}">login</a></li>
 					</ul>
 				</nav>
@@ -173,7 +173,9 @@
 				<p>Bring Home the Super Market Experience...!</p>
 
 				<div class="btn-box">
-					<button type="button">Explore</button>
+					<a href="{{url_for('explore')}}">
+					<button type="button" >Explore</button>
+					</a>
 				</div>
 			</div>
 		</div>

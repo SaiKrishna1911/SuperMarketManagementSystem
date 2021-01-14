@@ -14,9 +14,16 @@ try:
     #                 VALUES('{name}','{email}','{password}')
     #                 """
     # )
-    cur.execute("SET GLOBAL max_user_connections = 10;")
+    cur.execute(
+        f"SELECT * FROM Items LEFT JOIN (SELECT * FROM Cart WHERE customerId = (SELECT id FROM Users WHERE email = 'vakshaynayak@gmail.co') ) AS T ON Items.id=T.itemId ;")
     print(cur.fetchall())
-
+    print(len(cur.fetchall()))
+    cur.execute(
+        f"SELECT * from Cart WHERE customerId = (SELECT id FROM Users WHERE email = 'vakshaynayak@gmail.co')")
+    print(cur.fetchall())
+    cur.execute(
+        f"SELECT * from Cart WHERE customerId = (SELECT id FROM Users WHERE email = 'vakshaynayak@gmail.co')")
+    print(cur.fetchall())
 except Exception as error:
     print("Exception", error)
 finally:

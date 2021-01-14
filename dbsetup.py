@@ -50,6 +50,40 @@ try:
         );
         """
     )
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS Orders(
+            id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            customerId int,
+            orderDate datetime DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (customerId) REFERENCES Users(id)
+        );
+        """
+    )
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS OrderDetails(
+            id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            orderId int,
+            itemId int,
+            quantity int DEFAULT 1,
+            FOREIGN KEY (orderId) REFERENCES Orders(id),
+            FOREIGN KEY (itemId) REFERENCES Items(id)
+        );
+        """
+    )
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS Cart(
+            customerId int,
+            itemId int,
+            quantity int DEFAULT 1,
+            FOREIGN KEY (itemId) REFERENCES Items(id),
+            FOREIGN KEY (customerId) REFERENCES Users(id)
+        );
+        """
+    )
     connection.close()
 except Exception as error:
+    connection.close()
     print("Exception", error)

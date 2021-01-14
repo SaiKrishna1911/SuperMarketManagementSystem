@@ -24,6 +24,7 @@ def teardown_db(exception):
 
         if db is not None:
             db.close()
+            print("Connection closed")
 
 
 @app.route("/")
@@ -142,9 +143,42 @@ def home_admin():
 
 @app.route("/shop", methods=['GET', 'POST'])
 def shop():
+    addedItem = request.args.get('addedItem')
+    email = session["email"]
+    if addedItem:
+        cur.execute(
+            f"SELECT * from Cart WHERE customerId = (SELECT id FROM Users WHERE email = '{email}') AND itemId = {addedItem}")
+        if cur.fetchone():
+            cur.execute(
+                f"UPDATE Cart SET quantity = quantity+1 WHERE itemId = {addedItem}")
+        else:
+            cur.execute(
+                f"INSERT INTO Cart(customerId,itemId) VALUES((SELECT id FROM Users WHERE email = '{email}'), {addedItem})")
+        flash("Item added successfully. To edit quantity, visit cart.")
+
+    cur.execute(
+        f"SELECT * from Cart WHERE customerId = (SELECT id FROM Users WHERE email = '{email}')")
+    cart = cur.fetchall()
+    cartsize = len(cart)
+    print(cartsize)
     cur.execute("SELECT * from Items")
+    cur.execute(
+        f"""SELECT *
+        FROM Items
+        LEFT JOIN(SELECT * FROM Cart WHERE customerId=(SELECT id FROM Users WHERE email='{email}')) AS T
+        ON Items.id=T.itemId;
+        """)
     items = cur.fetchall()
-    return render_template("shop.html", items=items)
+    return render_template("shop.html", items=items, cartsize=cartsize)
+
+
+@app.route("/cart")
+def cart():
+    email = session["email"]
+    cur.execute(
+        f"SELECT * from Cart WHERE customerId = (SELECT id FROM Users WHERE email = '{email}')")
+    cart = cur.fetchall()
+    return render_template("cart.html", items=cart)
 
 
 @app.route("/previous_cart")

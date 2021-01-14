@@ -40,6 +40,7 @@ def login_required(f):
 def get_cur():
     if 'cur' not in g:
         g.db = dbConnection()
+        print("Connection established")
         g.cur = g.db.cursor()
     return g.cur
 

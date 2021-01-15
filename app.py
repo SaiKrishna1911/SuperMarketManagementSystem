@@ -229,7 +229,7 @@ def place_order():
         cur.execute(
             f"""
             INSERT INTO OrderDetails (orderId,itemId,quantity)
-            VALUES ({lastId} , {item["id"]}, {item['quantity']});
+            VALUES ({lastId} , {item['itemId']}, {item['quantity']});
             """
         )
     cur.execute(

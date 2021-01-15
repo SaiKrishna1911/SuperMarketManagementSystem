@@ -1,4 +1,4 @@
-#Kumar Sangakkara#kumar Sngakkara
+# Kumar Sangakkara#kumar Sngakkara
 import os
 from flask import Flask, render_template, url_for, request, flash, session, redirect
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -125,7 +125,9 @@ def profile_edit():
             redirect(url_for('home'))
         else:
             flash("Incorrect current password", "error")
-    return render_template("profile_edit.html")
+    cur.execute(f"""SELECT * FROM Users WHERE email = '{session["email"]}';""")
+    user = cur.fetchone()
+    return render_template("profile_edit.html", user=user)
 
 
 @app.route("/home")
@@ -199,6 +201,11 @@ def remove_item_from_cart():
         """
     )
     return redirect(url_for('cart'))
+
+
+@app.route("/place_order")
+def place_order():
+    return redirect(home)
 
 
 @app.route("/previous_cart")

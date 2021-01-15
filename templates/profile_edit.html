@@ -194,15 +194,16 @@
     <div class="form">
        <div class="inputfield">
           <label>User Name</label>
-          <input name="name" type="text" class="input">
+          <input name="name" type="text" class="input" placeholder="{{user['name']}}">
        </div>  
    <div class="inputfield">
           <label>Email Address</label>
-          <input name="email" type="email" class="input">
+          <span style="align-self: start;">{{user['email']}}</span>
+          <!-- <input name="email" type="email" class="input" placeholder="{{user['email']}}"> -->
        </div>
        <div class="inputfield">
           <label>Current Password</label>
-          <input name="old_password" type="password" class="input">
+          <input name="old_password" type="password" class="input"">
        </div>  
       <div class="inputfield">
           <label>New Password</label>
@@ -212,11 +213,11 @@
         
       <div class="inputfield">
           <label>Phone Number</label>
-          <input name="phone" type="text" class="input">
+          <input name="phone" type="text" class="input" placeholder="{{user['phone']}}">
        </div> 
       <div class="inputfield">
           <label>Address</label>
-          <textarea name="address" class="textarea"></textarea>
+          <textarea name="address" class="textarea" placeholder="{{user['address']}}"></textarea>
        </div>  
       <!-- <div class="inputfield terms">
           <label class="check">

@@ -176,14 +176,28 @@ def shop():
 def cart():
     email = session["email"]
     cur.execute(
-        f"SELECT * from Cart WHERE customerId = (SELECT id FROM Users WHERE email = '{email}')")
+        f"""SELECT * FROM Cart
+        LEFT JOIN Items 
+        ON Cart.itemId = Items.id
+        WHERE Cart.customerId = (SELECT id FROM Users WHERE email = '{email}')
+        """
+    )
     cart = cur.fetchall()
     return render_template("cart.html", items=cart)
 
 
 @app.route("/remove_item_from_cart")
-def remove_item():
-    itemId = request.args.get['id']
+def remove_item_from_cart():
+    itemId = request.args.get('id')
+    email = session['email']
+    cur.execute(
+        f"""
+        DELETE FROM Cart 
+        WHERE itemId = {itemId} 
+        AND customerId = (SELECT id FROM Users WHERE email = '{email}');
+        """
+    )
+    return redirect(url_for('cart'))
 
 
 @app.route("/previous_cart")

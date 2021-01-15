@@ -17,9 +17,10 @@
                 <td>{{item['name']}}</td>
                 <td>{{item["sale_rate"]}}</td>
                 <td>{{item['quantity']}}</td>
-                <td>{{item['sale_rate']*item['quantity']}}</td>
-                <td><button type="submit" formaction="{{url_for('delete_item', id = item['id']}}"></button></td>
+                <td>{{item["sale_rate"]*item['quantity']}}</td>
+                <td><a href="{{url_for('remove_item_from_cart', id = item['id'])}}">Remove</a></td>
             </tr>
+            {% endfor %}
         </table>
         <button type="submit">place order</button>
     </body>

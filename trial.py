@@ -24,6 +24,14 @@ try:
     cur.execute(
         f"SELECT * from Cart WHERE customerId = (SELECT id FROM Users WHERE email = 'vakshaynayak@gmail.co')")
     print(cur.fetchall())
+    cur.execute(
+        f"""SELECT * FROM Cart
+        LEFT JOIN Items 
+        ON Cart.itemId = Items.id
+        WHERE Cart.customerId = (SELECT id FROM Users WHERE email = 'vakshaynayak@gmail.co')
+        """
+    )
+    print(cur.fetchall())
 except Exception as error:
     print("Exception", error)
 finally:

@@ -181,6 +181,11 @@ def cart():
     return render_template("cart.html", items=cart)
 
 
+@app.route("/remove_item_from_cart")
+def remove_item():
+    itemId = request.args.get['id']
+
+
 @app.route("/previous_cart")
 def previous_cart():
     return render_template("previous_cart.html")
@@ -201,6 +206,7 @@ def admin():
 @app.route("/admin/add_item", methods=['GET', 'POST'])
 @admin_login_required
 def add_item():
+
     cur.execute("SELECT category FROM Categories ORDER BY category;")
     categories = cur.fetchall()
     cur.execute("SELECT brand FROM Brands ORDER BY brand;")
@@ -239,6 +245,12 @@ def add_item():
                            "/" + f"{item_id}.png")
 
     return render_template("add_item.html", categories=categories, brands=brands)
+
+
+@app.route("/admin/edit_item", methods=['GET', 'POST'])
+@admin_login_required
+def edit_item():
+    return render_template('edit_item.html')
 
 
 @app.route("/contact_us")

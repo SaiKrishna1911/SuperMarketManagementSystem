@@ -65,7 +65,7 @@
             <a href="javascript:void(0);" class="user">
                 <i class="far fa-user"></i>
             </a>
-            <a href="#">
+            <a href="{{url_for("cart")}}">
                 <i class="fas fa-shopping-cart">
                     <span class="num-cart-product">{{cartsize}}</span>
                 </i>
@@ -213,7 +213,8 @@
                       <!--product-img------------>
                       <div class="product-img">
                           <!--add-cart---->
-                            <a href="{{url_for('shop', addedItem = item['id'])}}" class="add-cart">
+                      <input name = "qty" id="qty{{item['id']}}" type="number" placeholder="{{item['quantity']}}" step="1" min="0">
+                            <a href="{{url_for('shop', addedItem = item['id'],qty = itm['quantity']}} class="add-cart">
                               <i class="fas fa-shopping-cart">{{item['quantity']}}</i>
                             </a>
                           <!--img------>

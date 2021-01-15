@@ -10,15 +10,17 @@
                 <th>Unit Price</th>
                 <th>Quantity</th>
                 <th>Total Price</th>
+                <th></th>
             </tr>
             {%for item in items%}
             <tr>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-            </tr>
-
+                <td>{{item['name']}}</td>
+                <td>{{item["sale_rate"]}}</td>
+                <td>{{item['quantity']}}</td>
+                <td>{{item['sale_rate']*item['quantity']}}</td>
+                <td><button type="submit" formaction="{{url_for('delete_item', id = item['id']}}"></button></td>
             </tr>
         </table>
+        <button type="submit">place order</button>
     </body>
 </html>

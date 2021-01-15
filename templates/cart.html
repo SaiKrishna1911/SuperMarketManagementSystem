@@ -42,10 +42,24 @@ button
 }
 button:hover
 {
-    background: transparent;
-    font-color:#fff;
+    background: #fff;
+    font-color:#000;
     font-size: 20px;
     transition: 0.2s;
+}
+.total
+{
+	width: 140px;
+    border: 1px solid #000;
+    color: #000;
+    padding: 10px;
+    font-size: 15px;
+    margin-right: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    background: #D0F7F8;
+    margin-top: 15%;
+    align-items: center;
 }
 .cart
 {
@@ -58,9 +72,9 @@ button:hover
 }
 
 table, th, td {
-  border: 2px solid black; 
-  width: 5px;
-  height: 5px;
+  border: 3px solid black; 
+  width: 8px;
+  height: 8px;
   border-collapse: collapse;
   background: #D0F7F8;
   align-items: center;
@@ -99,9 +113,10 @@ table, th, td, a {
             </tr>
 
             {% endfor %}
-        </table>
+        </table><br>
         <div class="btn-box">
-            Total : Rs.{{total}}<br>
+        	<div class="total">
+            Total : Rs.{{total}}</div>
                     <a href="{{url_for('place_order', totalamt=total)}}">
                     <button type="submit">place order</button>
                     </a>

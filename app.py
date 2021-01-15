@@ -122,7 +122,7 @@ def profile_edit():
                 """
             )
             flash("Changes applied Successfully")
-            redirect(url_for('home'))
+            return redirect(url_for('home'))
         else:
             flash("Incorrect current password", "error")
     cur.execute(f"""SELECT * FROM Users WHERE email = '{session["email"]}';""")

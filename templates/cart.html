@@ -58,15 +58,16 @@ button:hover
             {%for item in items%}
             <tr>
                 <td>{{item['name']}}</td>
-                <td>{{item["sale_rate"]}}</td>
+                <td>Rs.{{item["sale_rate"]}}</td>
                 <td>{{item['quantity']}}</td>
-                <td>{{item["sale_rate"]*item['quantity']}}</td>
+                <td>Rs.{{item["sale_rate"]*item['quantity']}}</td>
                 <td><a href="{{url_for('remove_item_from_cart', id = item['id'])}}">Remove</a></td>
             </tr>
             {% endfor %}
         </table>
         <div class="btn-box">
-                    <a href="{{url_for('place_order')}}">
+            Total : Rs.{{total}}<br>
+                    <a href="{{url_for('place_order', totalamt=total)}}">
                     <button type="submit">place order</button>
                     </a>
                 </div>

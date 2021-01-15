@@ -186,7 +186,11 @@ def cart():
         """
     )
     cart = cur.fetchall()
-    return render_template("cart.html", items=cart)
+    total = 0.0
+    for item in cart:
+        total = total + item['sale_rate'] * item['quantity']
+
+    return render_template("cart.html", items=cart, total=total)
 
 
 @app.route("/remove_item_from_cart")
@@ -203,13 +207,44 @@ def remove_item_from_cart():
     return redirect(url_for('cart'))
 
 
-@app.route("/place_order")
+@app.route("/place_order", methods=['GET', 'POST'])
 def place_order():
-    return redirect(home)
+    total = request.args.get('totalamt')
+    cur.execute(
+        f"""
+        INSERT INTO Orders (customerId,amount)
+        SELECT id, {total} FROM Users WHERE Users.email='{session["email"]}';
+        """
+    )
+    cur.execute("SELECT LAST_INSERT_ID()")
+    lastId = cur.fetchone()["LAST_INSERT_ID()"]
+    cur.execute(
+        f"""
+        SELECT * FROM Cart
+        WHERE customerId = (SELECT id FROM Users WHERE email = '{session["email"]}')
+        """
+    )
+    Items = cur.fetchall()
+    for item in Items:
+        cur.execute(
+            f"""
+            INSERT INTO OrderDetails (orderId,itemId,quantity)
+            VALUES ({lastId} , {item["id"]}, {item['quantity']});
+            """
+        )
+    cur.execute(
+        f"""
+        DELETE FROM Cart
+        WHERE customerId = (SELECT id FROM Users WHERE email = '{session['email']}');
+        """
+    )
+
+    return render_template('thank.html')
 
 
 @app.route("/previous_cart")
 def previous_cart():
+
     return render_template("previous_cart.html")
 
 

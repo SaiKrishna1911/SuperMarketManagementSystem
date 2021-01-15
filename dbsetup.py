@@ -56,6 +56,8 @@ try:
             id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
             customerId int,
             orderDate datetime DEFAULT CURRENT_TIMESTAMP,
+            amount float,
+            status int DEFAULT 0,
             FOREIGN KEY (customerId) REFERENCES Users(id)
         );
         """

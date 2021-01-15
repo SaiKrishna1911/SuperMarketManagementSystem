@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Cart</title>
-        <style>
+    <style>
         body
         {
             margin: 0;
@@ -43,7 +43,7 @@ button:hover
     font-color:#000;
 }
 
-      </style> 
+      </style>  
 </head>
     <body>
         <table style="width:100%">
@@ -59,10 +59,16 @@ button:hover
                 <td>{{item['name']}}</td>
                 <td>{{item["sale_rate"]}}</td>
                 <td>{{item['quantity']}}</td>
-                <td>{{item['sale_rate']*item['quantity']}}</td>
-                <td><button type="submit" formaction="{{url_for('delete_item', id = item['id']}}"></button></td>
+                <td>{{item["sale_rate"]*item['quantity']}}</td>
+                <td><button1 type="submit" formaction="{{url_for('delete_item', id = item['id'])}}"></button1></td>
             </tr>
+            {% endfor %}
         </table>
-        <button type="submit">place order</button>
+        <div class="btn-box">
+                    <a href="{{url_for('explore')}}">
+                    <button type="submit">place order</button>
+                    </a>
+                </div>
+        
     </body>
 </html>

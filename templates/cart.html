@@ -2,6 +2,48 @@
 <html>
 <head>
     <title>Cart</title>
+    <style>
+        body
+        {
+            margin: 0;
+            padding: 0;
+            display: block;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: sans-serif; 
+            background: url(../static/images/cart.jfif);
+            background-size: cover;
+        }
+.btn-box
+{
+    margin-top: 15%;
+    margin-left: 40%;
+    align-items: center;
+}
+button
+{
+    width: 150px;
+    border: 1px solid #ff6b3f;
+    color: #fff;
+    padding: 10px;
+    font-size: 15px;
+    margin-right: 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    background: #ff6b3f;
+    margin-top: 15%;
+    align-items: center;
+    
+
+}
+button:hover
+{
+    background: transparent;
+    font-color:#000;
+}
+
+      </style>  
 </head>
     <body>
         <table style="width:100%">
@@ -18,10 +60,19 @@
                 <td>{{item["sale_rate"]}}</td>
                 <td>{{item['quantity']}}</td>
                 <td>{{item["sale_rate"]*item['quantity']}}</td>
+<<<<<<< HEAD
                 <td><a href="{{url_for('remove_item_from_cart', id = item['id'])}}">Remove</a></td>
+=======
+                <td><button1 type="submit" formaction="{{url_for('delete_item', id = item['id'])}}"></button1></td>
+>>>>>>> 8c0a240fd2b6bcb42de3fc045f7365cb5b1624b3
             </tr>
             {% endfor %}
         </table>
-        <button type="submit">place order</button>
+        <div class="btn-box">
+                    <a href="{{url_for('explore')}}">
+                    <button type="submit">place order</button>
+                    </a>
+                </div>
+        
     </body>
 </html>

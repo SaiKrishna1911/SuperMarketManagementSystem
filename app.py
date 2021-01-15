@@ -144,19 +144,27 @@ def home_admin():
     return render_template("home_admin.html")
 
 
-@app.route("/shop", methods=['GET', 'POST'])
-def shop():
+@app.route("/shop", defaults="Items" methods=['GET', 'POST'])
+@app.route("/shop/<category>", methods=['GET', 'POST'])
+def shop(category):
+    if category == "Baby":
+        category = "Baby Care"
     addedItem = request.args.get('addedItem')
+    addedItemqty = request.args.get('qty')
     email = session["email"]
     if addedItem:
         cur.execute(
             f"SELECT * from Cart WHERE customerId = (SELECT id FROM Users WHERE email = '{email}') AND itemId = {addedItem}")
         if cur.fetchone():
             cur.execute(
-                f"UPDATE Cart SET quantity = quantity+1 WHERE itemId = {addedItem}")
+                f"UPDATE Cart SET quantity = {addedItemqty} WHERE itemId = {addedItem}")
         else:
             cur.execute(
-                f"INSERT INTO Cart(customerId,itemId) VALUES((SELECT id FROM Users WHERE email = '{email}'), {addedItem})")
+                f"""
+                INSERT INTO Cart(customerId,itemId,quantity) 
+                VALUES((SELECT id FROM Users WHERE email = '{email}'), {addedItem} ,{addedItemqty} )
+                """
+            )
         flash("Item added successfully. To edit quantity, visit cart.")
 
     cur.execute(
@@ -165,14 +173,15 @@ def shop():
     cartsize = len(cart)
     print(cartsize)
     cur.execute("SELECT * from Items")
-    cur.execute(
-        f"""SELECT *
-        FROM Items
-        LEFT JOIN(SELECT * FROM Cart WHERE customerId=(SELECT id FROM Users WHERE email='{email}')) AS T
-        ON Items.id=T.itemId;
-        """)
+    if category == 'All':
+        cur.execute(
+            f"""SELECT *
+            FROM [{category}]
+            LEFT JOIN(SELECT * FROM Cart WHERE customerId=(SELECT id FROM Users WHERE email='{email}')) AS T
+            ON Items.id=T.itemId;
+            """)
     items = cur.fetchall()
-    return render_template("shop.html", items=items, cartsize=cartsize)
+    return render_template("shop.html", items=items, cartsize=cartsize, cur_url=request_url)
 
 
 @app.route("/cart")

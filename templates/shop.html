@@ -161,7 +161,7 @@
                       <div class="product-img">
                           <!--add-cart---->
                       <input name = "qty" id="qty{{item['id']}}" type="number" placeholder="{{item['quantity']}}" step="1" min="0">
-                            <a href="{{url_for('shop', addedItem = item['id'],qty = item['quantity'])}}" class="add-cart">
+                            <a href="{{url_for('request_url', addedItem = item['id'],qty = item['quantity'])}}" class="add-cart">
                               <i class="fas fa-shopping-cart">{{item['quantity']}}</i>
                             </a>
                           <!--img------>

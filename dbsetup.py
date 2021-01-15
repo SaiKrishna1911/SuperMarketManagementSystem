@@ -85,6 +85,14 @@ try:
         );
         """
     )
+    cursor.execute(
+        """
+        CREATE VIEW [Baby Care] AS
+        SELECT *
+        FROM Items
+        WHERE Categories = (SELECT id FROM Categories WHERE category = "Baby Care");
+        """
+    )
     connection.close()
 except Exception as error:
     connection.close()

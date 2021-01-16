@@ -68,7 +68,7 @@ def login():
                     return redirect(next_url)
                 # close_connection()
                 # connection.close()
-                return render_template("home.html")
+                return redirect(home)
         elif 'login' in request.form:
             email = request.form['email']
             password = request.form['password']

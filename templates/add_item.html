@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Add Item</title>
-    <style>
+    <!-- <style>
       * {
       margin: 0;
       padding: 0;
@@ -79,35 +79,75 @@ button:hover
   padding: 5px;
   border-radius: 10px;
   overflow: hidden;
+} --> 
+<style>
+    body{
+      margin-bottom: 10%;
+        color: #fff;
+        background-color: #000003;
+background-image:  url("https://wallpaperaccess.com/full/1624848.jpg");
+          background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-left: 20rem;
+  
+  
+
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+    
+        /* height: 100%;
+        width: 100%; */
+          /* background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+          url(../static/images/pic4.jpg); */
+          /* background-position: center;
+          background-size: cover;
+          position: absolute;
+          align-items: center; */
+          }
+          button:hover
+{
+    background: #fff;
+    font-color:#000;
+    font-size: 20px;
+    transition: 0.2s;
 }
-
 </style>
-</head>
-<body>
-<div class="container">
-  <div class="row">
-    <div class="col">
 
-      {% with messages = get_flashed_messages(with_categories=true) %}
+<!-- </style> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    
+<div class="container ">
+    <!-- <div class="card text-white bg-dark"> -->
+  <!-- <div class="row">
+    <div class="col"> -->
+
+      <!-- {% with messages = get_flashed_messages(with_categories=true) %}
             {% for category, message in messages %}
                 <h3><div class="flashes {{ category }}" style='color: red;' >{{ message }}</div></h3>
             {% endfor %}
-        {% endwith %}
-
+        {% endwith %} -->
+      
       <form action="{{url_for('add_item')}}" method="POST" enctype="multipart/form-data">
-        
+        <div class="form">
         <div class="form-group">
-        <label for="category">Choose a category:</label>
-        <select name="category" id="category" onchange='CheckOthers(this.value,"new_category");'>
+        <label for="category " class="font-weight-bold text-white bg-dark">Choose a category:</label>
+        <select name="category" class="form-control w-50 p-2 " id="category" onchange='CheckOthers(this.value,"new_category");'>
             {% for category in categories %}
                 <option value="{{category['category']}}">{{category['category']}}</option>
             {% endfor %}
             <option value="Other">Other</option>
         </select>
-        <input type="text" name="new_category" id="new_category" style='display:none;' placeholder="Enter new category"/><br>
+        <input type="text"   name="new_category" id="new_category" style='display:none;' placeholder="Enter new category"/><br>
 
-        <label for="brand" >Choose a brand:</label>
-        <select name="brand" id="brand" onchange='CheckOthers(this.value,"new_brand");'>
+        <label for="brand" class="font-weight-bold text-white bg-dark" >Choose a brand:</label>
+        <select name="brand" class="form-control  w-50 p-2 ]" id="brand" onchange='CheckOthers(this.value,"new_brand");'>
             {% for brand in brands %}
                 <option value="{{brand['brand']}}">{{brand['brand']}}</option>
             {% endfor %}
@@ -115,25 +155,27 @@ button:hover
         </select>
         <input type="text" name="new_brand" id="new_brand" style='display:none;' placeholder="Enter new brand"/><br>
 
-        <label for="name">Item Name:</label><br>
-        <input type="text" id="name" name="name" required><br>
+        <label for="name" class="font-weight-bold text-white bg-dark">Item Name:</label><br>
+        <input type="text" class="form-control w-50 p-2" id="name" name="name" required><br>
 
-        <label for="mrp">MRP:</label><br>
-        <input name = "mrp" id="mrp" type="number" placeholder="0.00" step="0.01" min="0" required> <br>
+        <label for="mrp" class="font-weight-bold text-white bg-dark">MRP:</label><br>
+        <input name = "mrp"  class="form-control w-50 p-2" id="mrp" type="number" placeholder="0.00" step="0.01" min="0" required> <br>
 
-        <label for="sale_rate">Sale rate:</label><br>
-        <input name="sale_rate" id="sale_rate" type="number" placeholder="0.00" step="0.01" min="0" required> <br>        
+        <label for="sale_rate" class="font-weight-bold text-white bg-dark ">Sale rate:</label><br>
+        <input name="sale_rate" class="form-control  w-50 p-2" id="sale_rate" type="number" placeholder="0.00" step="0.01" min="0" required> <br>        
 
-        <label for="image">Select image</label>
-        <input type="file" name="image" id="image"><br> <br> 
+        <label for="image" class="font-weight-bold text-white bg-dark">Select image</label>
+        <input type="file" class="form-control  w-50 p-2" name="image" id="image"><br> <br> 
 
-        <button type="submit">Add Item</button>
+        <button type="button"  class="btn btn-dark btn-lg">Add Item</button>
 
       </form>
 
-    </div>
-  </div>
+    <!-- </div>
+  </div> -->
 </div>
+</div>
+
 
 <script type="text/javascript">
 function CheckOthers(val,textbox){
@@ -148,6 +190,5 @@ function CheckOthers(val,textbox){
 }
 </script>
 </body>
+<div>
 </html>
-
-

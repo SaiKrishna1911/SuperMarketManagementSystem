@@ -53,21 +53,21 @@
         <div class="toggle"></div>
         <!--menu----------------->
         <ul class="menu">
-            <li><a href="#">Home</a></li>
-            <li  class="shop"><a href="#" >Shop</a></li>
-            <li><a href="#">Groceries</a>
+            <li><a href="{{url_for('home')}}">Home</a></li>
+            <li  class="shop"><a href="url_for('shop', category='BabyCare')" >Baby Care</a></li>
+            <li><a href="url_for('shop', category='Food')">Groceries</a>
                 <!--lable---->
                 <span class="sale-lable">Sale</span>
             </li>
-            <li><a href="#">Utensils</a></li>
-            <li><a href="#">Explore</a></li>
+            <li><a href="url_for('shop', category='Utensils')">Utensils</a></li>
+            <li><a href="{{url_for('explore')}}">Explore</a></li>
         </ul>
         <!--right-menu----------->
         <div class="right-menu">
             <a href="javascript:void(0);" class="search">
                 <i class="fas fa-search"></i>
             </a>
-            <a href="javascript:void(0);" class="user">
+            <a href="{{url_for('profile_edit')}}" class="user">
                 <i class="far fa-user"></i>
             </a>
             <a href="{{url_for("cart")}}">

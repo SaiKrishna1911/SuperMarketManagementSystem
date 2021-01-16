@@ -7,7 +7,7 @@
 <body>
     {% if size == 0 %}
     Item not found! Search again
-    <form action="{{url_for(edit_item')}}" method="POST">
+    <form action="{{url_for('edit_item_search')}}" method="GET">
         <label for="name">Enter Item name</label><br>
         <input type="text" id="name" name="name" required><br>
         <button type="submit">Search Item</button>
@@ -16,11 +16,12 @@
 
     <ul>
         {% for item in items %}
-        <li><a href="{{url_for('edit_item', itemId=item['id'])}}>
+        <li><a href="{{url_for('edit_item', itemId=item['id'])}}">
             <img src="{{ url_for('static', filename='/uploads/{}.png'.format(item['id'])) }}"><br>
             {{item['name']}}
             </a>
         </li>
+        {% endfor %}
     </ul>
 </body>
 </html>

@@ -353,24 +353,26 @@ def add_item():
 @app.route("/admin/edit_item_search", methods=['GET', 'POST'])
 @admin_login_required
 def edit_item_search():
-    if request.method != 'POST':
+    if request.method != 'GET':
         return render_template('edit_item_search.html')
     else:
         name = request.args.get('name')
         cur.execute(
             f"SELECT * FROM Items WHERE UPPER(name) LIKE UPPER('%{name}%')")
         items = cur.fetchall()
+        print(name)
+        print(items)
         return render_template('select_items.html', items=items, size=len(items))
 
 
 @app.route("/admin/edit_item", methods=['GET', 'POST'])
 @admin_login_required
-def edit_ite():
+def edit_item():
     cur.execute("SELECT category FROM Categories ORDER BY category;")
     categories = cur.fetchall()
     cur.execute("SELECT brand FROM Brands ORDER BY brand;")
     brands = cur.fetchall()
-    itemId = request.form['itemId']
+    itemId = request.args.get('itemId')
     cur.execute(f"SELECT * FROM Items WHERE name = '{itemId}'")
     items = cur.fetchall()
     if request.method == 'POST':

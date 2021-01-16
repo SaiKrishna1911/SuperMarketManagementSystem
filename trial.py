@@ -38,7 +38,13 @@ try:
     #     WHERE Users.email='vakshaynayak@gmail.co';
     #     """
     # )
-    cur.execute("SELECT LAST_INSERT_ID()")
+    email = "vakshaynayak@gmail.co"
+    cur.execute(
+        f"""SELECT *
+            FROM BabyCare
+            LEFT JOIN(SELECT * FROM Cart WHERE customerId=(SELECT id FROM Users WHERE email='{email}')) AS T
+            ON {category}.id=T.itemId;
+            """)
     print(cur.fetcall())
 except Exception as error:
     print("Exception", error)

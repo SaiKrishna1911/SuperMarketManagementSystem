@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Item</title>
+    <style>
+      * {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+        }
+    .container {
+        height: 100%;
+        width: 100%;
+          background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+          url(../static/images/pic4.jpg);
+          background-position: center;
+          background-size: cover;
+          position: absolute;
+          align-items: center;
+          }
+.a
+{
+  text-decoration: none;
+  color: #fff;
+  font-size: 13px;
+  padding: 5px 2px;
+  align-items: center;
+  margin-right: 50px;
+
+}
+.a hover
+{
+  border-bottom: 1px solid #ff6b3f; 
+}
+.form-group
+{
+ margin-top: 15%;
+  margin-left: 40%;
+  align-items: center;
+}
+.option
+{
+  color: #000;
+}
+.label
+{
+   margin-top: 15%;
+  margin-left: 40%;
+  align-items: center;
+  color: #000;
+}
+button
+{
+  width: 150px;
+  border: 1px solid #ff6b3f;
+  color: #fff;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 25px;
+  cursor: pointer;
+  background: #ff6b3f;
+  margin-top: 15%;
+  align-items: center;
+  
+
+}
+button:hover
+{
+  background: transparent;
+  color: #000;
+}
+.form-group
+{
+  width: 380px;
+  height: 480px;
+  position: relative;
+  margin: 6% auto;
+  background: #fff;
+  padding: 5px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <h3><div class="flashes {{ category }}" style='color: red;' >{{ message }}</div></h3>
+            {% endfor %}
+        {% endwith %}
+
+      <form action="{{url_for('add_item')}}" method="POST" enctype="multipart/form-data">
+        
+        <div class="form-group">
+        <label for="category">Choose a category:</label>
+        <select name="category" id="category" onchange='CheckOthers(this.value,"new_category");'>
+            {% for category in categories %}
+                <option value="{{category['category']}}">{{category['category']}}</option>
+            {% endfor %}
+            <option value="Other">Other</option>
+        </select>
+        <input type="text" name="new_category" id="new_category" style='display:none;' placeholder="Enter new category"/><br>
+
+        <label for="brand" >Choose a brand:</label>
+        <select name="brand" id="brand" onchange='CheckOthers(this.value,"new_brand");'>
+            {% for brand in brands %}
+                <option value="{{brand['brand']}}">{{brand['brand']}}</option>
+            {% endfor %}
+            <option value="Other">Other</option>
+        </select>
+        <input type="text" name="new_brand" id="new_brand" style='display:none;' placeholder="Enter new brand"/><br>
+
+        <label for="name">Item Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="mrp">MRP:</label><br>
+        <input name = "mrp" id="mrp" type="number" placeholder="0.00" step="0.01" min="0" required> <br>
+
+        <label for="sale_rate">Sale rate:</label><br>
+        <input name="sale_rate" id="sale_rate" type="number" placeholder="0.00" step="0.01" min="0" required> <br>        
+
+        <label for="image">Select image</label>
+        <input type="file" name="image" id="image"><br> <br> 
+
+        <button type="submit">Save Item Changes</button>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function CheckOthers(val,textbox){
+ var element=document.getElementById(textbox);
+ if(val=='Other'){
+   element.style.display='block';
+   element.required = true;
+ }
+ else  
+   element.style.display='none';
+   element.required = false;
+}
+</script>
+</body>
+</html>
+
+

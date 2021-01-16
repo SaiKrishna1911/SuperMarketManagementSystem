@@ -160,10 +160,16 @@
                       <!--product-img------------>
                       <div class="product-img">
                           <!--add-cart---->
-                      <input name = "qty" id="qty{{item['id']}}" type="number" placeholder="{{item['quantity']}}" step="1" min="0">
-                            <a href="{{url_for('shop', addedItem = item['id'],qty = item['quantity'])}}" class="add-cart">
-                              <i class="fas fa-shopping-cart">{{item['quantity']}}</i>
-                            </a>
+                            <form action="{{url_for('shop',category = category)}}", method="GET">
+                                <input name="addedItem" style='display:none;' value = "{{item['id']}}"placeholder="">
+                                <input name = "qty" id="qty{{item['id']}}" type="number"  placeholder="{{item['quantity']}}" step="1" min="0">
+                                <button type="submit" >
+                                    <a href="" class="add-cart">
+                                        <i class="fas fa-shopping-cart">{{item['quantity']}}</i>
+                                        </a>
+                                </button>
+                            </form>
+                            
                           <!--img------>
                         <img src="{{ url_for('static', filename='/uploads/{}.png'.format(item['id'])) }}">
                       </div>

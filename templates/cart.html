@@ -118,10 +118,9 @@ tr:nth-child(even) {background-color: #f2f2f2;}
             </tr>
 
             {% endfor %}
-        </table><br>
+        </table>
         <div class="btn-box">
-        	<div class="total">
-            Total : Rs.{{total}}</div>
+        	<div class="total">Total : Rs.{{total}}</div>
                     <a href="{{url_for('place_order', totalamt=total)}}">
                     <button type="submit">place order</button>
                     </a>

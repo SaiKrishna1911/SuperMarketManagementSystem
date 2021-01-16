@@ -145,34 +145,42 @@ def home_admin():
 
 
 @app.route("/shop", methods=['GET', 'POST'])
-def shop():
+@app.route("/shop/<category>", methods=['GET', 'POST'])
+def shop(category='Items'):
     addedItem = request.args.get('addedItem')
+    addedItemqty = request.args.get('qty')
+    if not addedItemqty:
+        addedItemqty = 1
     email = session["email"]
     if addedItem:
         cur.execute(
             f"SELECT * from Cart WHERE customerId = (SELECT id FROM Users WHERE email = '{email}') AND itemId = {addedItem}")
         if cur.fetchone():
             cur.execute(
-                f"UPDATE Cart SET quantity = quantity+1 WHERE itemId = {addedItem}")
+                f"UPDATE Cart SET quantity = {addedItemqty} WHERE itemId = {addedItem}")
         else:
             cur.execute(
-                f"INSERT INTO Cart(customerId,itemId) VALUES((SELECT id FROM Users WHERE email = '{email}'), {addedItem})")
-        flash("Item added successfully. To edit quantity, visit cart.")
+                f"""
+                INSERT INTO Cart(customerId, itemId, quantity)
+                SELECT id,{addedItem}, {addedItemqty} FROM Users WHERE email='{session["email"]}'
+                """
+            )
+        flash("Item added successfully.")
 
     cur.execute(
         f"SELECT * from Cart WHERE customerId = (SELECT id FROM Users WHERE email = '{email}')")
     cart = cur.fetchall()
     cartsize = len(cart)
     print(cartsize)
-    cur.execute("SELECT * from Items")
+    # cur.execute("SELECT * from Items")
     cur.execute(
         f"""SELECT *
-        FROM Items
+        FROM {category}
         LEFT JOIN(SELECT * FROM Cart WHERE customerId=(SELECT id FROM Users WHERE email='{email}')) AS T
-        ON Items.id=T.itemId;
+        ON {category}.id=T.itemId;
         """)
     items = cur.fetchall()
-    return render_template("shop.html", items=items, cartsize=cartsize)
+    return render_template("shop.html", items=items, cartsize=cartsize, category=category)
 
 
 @app.route("/cart")
@@ -244,8 +252,46 @@ def place_order():
 
 @app.route("/previous_cart")
 def previous_cart():
+    cur.execute(
+        f"""
+        SELECT * FROM Orders
+        WHERE customerId = (SELECT id FROM Users WHERE email = '{session['email']}')
+        ORDER BY orderDate DESC;
+        """
+    )
+    orders = cur.fetchall()
+    for order in orders:
+        cur.execute(
+            f"""
+            SELECT * FROM OrderDetails
+            LEFT JOIN Items
+            ON OrderDetails.itemId = Items.id
+            WHERE OrderDetails.orderId = {order['id']}
+            """
+        )
+        order['items'] = cur.fetchall()
+    return render_template("previous_cart.html", orders=orders)
 
-    return render_template("previous_cart.html")
+
+@app.route("/add_to_cart")
+def add_to_cart():
+    orderId = request.args.get('orderId')
+    cur.execute(
+        f"""
+        DELETE FROM Cart
+        WHERE customerId = (SELECT id FROM Users WHERE email = '{session['email']}');
+        """
+    )
+    cur.execute(f"SELECT * FROM OrderDetails WHERE orderId = {orderId}")
+    OrderDetails = cur.fetchall()
+    for OrderDetail in OrderDetails:
+        cur.execute(
+            f"""
+            INSERT INTO Cart(customerId, itemId, quantity)
+            SELECT id,{OrderDetail['itemId']}, {OrderDetail['quantity']} FROM Users WHERE email='{session["email"]}'
+            """
+        )
+    return redirect(url_for('cart'))
 
 
 @app.route("/explore")
@@ -304,10 +350,65 @@ def add_item():
     return render_template("add_item.html", categories=categories, brands=brands)
 
 
+@app.route("/admin/edit_item_search", methods=['GET', 'POST'])
+@admin_login_required
+def edit_item_search():
+    if request.method != 'GET':
+        return render_template('edit_item_search.html')
+    else:
+        name = request.args.get('name')
+        cur.execute(
+            f"SELECT * FROM Items WHERE UPPER(name) LIKE UPPER('%{name}%')")
+        items = cur.fetchall()
+        print(name)
+        print(items)
+        return render_template('select_items.html', items=items, size=len(items))
+
+
 @app.route("/admin/edit_item", methods=['GET', 'POST'])
 @admin_login_required
 def edit_item():
-    return render_template('edit_item.html')
+    cur.execute("SELECT category FROM Categories ORDER BY category;")
+    categories = cur.fetchall()
+    cur.execute("SELECT brand FROM Brands ORDER BY brand;")
+    brands = cur.fetchall()
+    itemId = request.args.get('itemId')
+    cur.execute(f"SELECT * FROM Items WHERE name = '{itemId}'")
+    items = cur.fetchall()
+    if request.method == 'POST':
+        cur.execute(f"SELECT id,name from Items where name = '{name}'")
+        if cur.fetchone():
+            flash("Item with that name already exist. Please try again")
+        else:
+            category = request.form["category"]
+            brand = request.form['brand']
+            mrp = request.form['mrp']
+            sale_rate = request.form['sale_rate']
+            if category == 'Other':
+                category = request.form['new_category']
+                cur.execute(
+                    f"INSERT INTO Categories(category) VALUES('{category}');")
+            if brand == 'Other':
+                brand = request.form['new_brand']
+                cur.execute(f"INSERT INTO Brands(brand) VALUES('{brand}');")
+            cur.execute(
+                f"""
+                UPDATE Items 
+                SET categoryId = (SELECT id from Categories WHERE category = '{category}'),
+                brandId = (SELECT id from Brands WHERE brand = '{brand}'),
+                name = '{name}',
+                mrp = {mrp},
+                sale_rate = {sale_rate};
+                """
+            )
+            cur.execute(f"SELECT id FROM Items WHERE name = '{name}'")
+            item_id = cur.fetchone()["id"]
+            image = request.files.get("image")
+            if image:
+                image.save(app.config['UPLOAD_FOLDER'] +
+                           "/" + f"{item_id}.png")
+
+    return render_template("edit_item.html", categories=categories, brands=brands, items=items)
 
 
 @app.route("/contact_us")

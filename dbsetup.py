@@ -87,10 +87,26 @@ try:
     )
     cursor.execute(
         """
-        CREATE VIEW [Baby Care] AS
+        CREATE OR REPLACE VIEW BabyCare AS
         SELECT *
         FROM Items
-        WHERE Categories = (SELECT id FROM Categories WHERE category = "Baby Care");
+        WHERE categoryId = (SELECT id FROM Categories WHERE category = "Baby Care");
+        """
+    )
+    cursor.execute(
+        """
+        CREATE OR REPLACE VIEW Food AS
+        SELECT *
+        FROM Items
+        WHERE categoryId = (SELECT id FROM Categories WHERE category = "Food");
+        """
+    )
+    cursor.execute(
+        """
+        CREATE OR REPLACE VIEW Utensils AS
+        SELECT *
+        FROM Items
+        WHERE categoryId = (SELECT id FROM Categories WHERE category = "Utensils");
         """
     )
     connection.close()

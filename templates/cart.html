@@ -55,10 +55,8 @@ button:hover
     padding: 10px;
     font-size: 15px;
     margin-right: 10px;
-    border-radius: 20px;
-    cursor: pointer;
     background: #D0F7F8;
-    margin-top: 15%;
+    margin-top: 5%;
     align-items: center;
 }
 .cart
@@ -113,10 +111,9 @@ table, th, td, a {
             </tr>
 
             {% endfor %}
-        </table><br>
+        </table>
         <div class="btn-box">
-        	<div class="total">
-            Total : Rs.{{total}}</div>
+        	<div class="total">Total : Rs.{{total}}</div>
                     <a href="{{url_for('place_order', totalamt=total)}}">
                     <button type="submit">place order</button>
                     </a>

@@ -15,7 +15,7 @@
             align-items: center;
             min-height: 100vh;
             font-family: sans-serif; 
-            background: url(../static/images/fnv.jpg);
+            background: url(../static/images/66.png);
             background-size: cover;
         }
 .btn-box
@@ -31,35 +31,35 @@ button
     color: #000;
     padding: 10px;
     font-size: 15px;
-    margin-right: 10px;
+    margin-left: 10px;
     border-radius: 30px;
     cursor: pointer;
-    background: #D0F7F8;
+    background: transparent;
     margin-top: 15%;
     align-items: center;
-    
-
-}
+    padding-right: 30px;
+    }
 button:hover
 {
-    background: #fff;
+    background: #f2f2f2;
     font-color:#000;
     font-size: 20px;
     transition: 0.2s;
 }
 .total
 {
-	width: 140px;
-    border: 1px solid #000;
+	width: 150px;
+    
     color: #000;
     padding: 10px;
     font-size: 15px;
     margin-right: 10px;
     border-radius: 20px;
     cursor: pointer;
-    background: #D0F7F8;
-    margin-top: 15%;
-    align-items: center;
+    background: transparent;
+    padding-right: 30px;
+    align-items: right;
+    font-weight: 10px solid;
 }
 .cart
 {
@@ -71,23 +71,21 @@ button:hover
 	color: #fff;
 }
 
-table, th, td {
-  border: 3px solid black; 
-  width: 8px;
-  height: 8px;
+table {	
+  
+  width: 50%;
   border-collapse: collapse;
-  background: #D0F7F8;
-  align-items: center;
-
 }
-table tr
-{
-	margin-left: 50%;
+th {
+	height: 35px;
+	background-color: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)) #000;
+  		color: white;
 }
-table, th, td, a {
-	color: #000;
+td {
+  text-align: center;
 }
-
+tr:hover {background-color: #f5f5f5;}
+tr:nth-child(even) {background-color: #f2f2f2;}
 
       </style>  
 </head>
@@ -105,10 +103,10 @@ table, th, td, a {
             <form ></form>
             {%for item in items%}
             <tr>
-                <td>{{item['name']}}</td>
-                <td>Rs.{{item["sale_rate"]}}</td>
-                <td>{{item['quantity']}}</td>
-                <td>Rs.{{item["sale_rate"]*item['quantity']}}</td>
+                <td>{{item['name']}}<br></td>
+                <td>Rs.{{item["sale_rate"]}}<br></td>
+                <td>{{item['quantity']}}<br></td>
+                <td>Rs.{{item["sale_rate"]*item['quantity']}}<br></td>
                 <td><a href="{{url_for('remove_item_from_cart', id = item['id'])}}">Remove</a></td>
             </tr>
 

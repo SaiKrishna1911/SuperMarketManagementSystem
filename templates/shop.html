@@ -6,21 +6,25 @@
 <title>Shopping Website</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/shop/css/style.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='/shop/css/lightslider.css') }}">
-<script src="js/Jquery.js"></script>
-<script src="js/lightslider.js"></script>
+<script src="{{ url_for('static', filename='/shop/js/Jquery.js') }}"></script>
+<script src="{{ url_for('static', filename='/shop/js/lightslider.js') }}"></script>
 <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js"></script>
 <script
   src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
 <!--fav-icon---------------->
-<link rel="shortcut icon" href="{{ url_for('static', filename='/shop/images/fav-icon.png') }}"/>
+<link rel="shortcut icon" href="{{ url_for('static', filename='shop/images/fav-icon.png') }}"/>
 	<!--style----->
 	<style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
     
 		body{
 			font-family:poppins;
-		}
+        }
+        .kumars:hover
+        {
+            cursor: pointer;
+        }
 	</style>
 	
 </head>
@@ -54,12 +58,12 @@
         <!--menu----------------->
         <ul class="menu">
             <li><a href="{{url_for('home')}}">Home</a></li>
-            <li  class="shop"><a href="url_for('shop', category='BabyCare')" >Baby Care</a></li>
-            <li><a href="url_for('shop', category='Food')">Groceries</a>
+            <li  class="shop"><a href="{{url_for('shop', category = 'BabyCare')}}" >Baby Care</a></li>
+            <li><a href="{{url_for('shop', category='Food')}}">Groceries</a>
                 <!--lable---->
                 <span class="sale-lable">Sale</span>
             </li>
-            <li><a href="url_for('shop', category='Utensils')">Utensils</a></li>
+            <li><a href="{{url_for('shop', category='Utensils')}}">Utensils</a></li>
             <li><a href="{{url_for('explore')}}">Explore</a></li>
         </ul>
         <!--right-menu----------->
@@ -92,55 +96,7 @@
     </div>
     </div>
     <!-----------full-slider----------------------------->
-    <ul id="adaptive" class="cs-hidden">
-        
-        <!--box-1--------------------------->
-        <li class="item-a">
-            <!---box------------------->
-    <div class="full-slider-box f-slide-1">
-        
-        <div class="f-slider-text-container">
-        <div class="f-slider-text">
-            <span>Limited Offer</span>
-            <strong>30% Off<br/> With <font>Promo Code</font></strong>
-            <a href="#" class="f-slider-btn">Shop Now</a>
-        </div>
-        </div>
     
-    </div>
-    </li>
-     <!--box-2--------------------------->
-        <li class="item-b">
-            <!---box------------------->
-    <div class="full-slider-box f-slide-2">
-        
-        <div class="f-slider-text-container">
-        <div class="f-slider-text">
-            <span>Limited Offer</span>
-            <strong>30% Off<br/> With <font>Promo Code</font></strong>
-            <a href="#" class="f-slider-btn">Shop Now</a>
-        </div>
-        </div>
-    
-    </div>
-    </li>
-         <!--box-3--------------------------->
-         <li class="item-c">
-            <!---box------------------->
-    <div class="full-slider-box f-slide-3">
-        
-        <div class="f-slider-text-container">
-        <div class="f-slider-text">
-            <span>Limited Offer</span>
-            <strong>30% Off<br/> With <font>Promo Code</font></strong>
-            <a href="#" class="f-slider-btn">Shop Now</a>
-        </div>
-        </div>
-    
-    </div>
-    </li>
-     
-    </ul>
     <!--product-categories-slider---------------------->
         
         
@@ -163,11 +119,18 @@
                             <form action="{{url_for('shop',category = category)}}", method="GET">
                                 <input name="addedItem" style='display:none;' value = "{{item['id']}}"placeholder="">
                                 <input name = "qty" id="qty{{item['id']}}" type="number"  placeholder="{{item['quantity']}}" step="1" min="0">
-                                <button type="submit" >
+                                <div class="kumars">
+                                    <button type="submit" style="border-style: hidden;">
                                     <a href="" class="add-cart">
-                                        <i class="fas fa-shopping-cart">{{item['quantity']}}</i>
+                                        
+                                        <i class="fas fa-shopping-cart">
+                                            {% if item["quantity"] != None %}
+                                                {{item['quantity']}}
+                                            {% endif %}
+                                        </i>
                                         </a>
-                                </button>
+                                        </button>
+                                    </div>
                             </form>
                             
                           <!--img------>
@@ -347,8 +310,8 @@
   
        
      
-  	<script src="js/Jquery.js"></script>
-  	<script src="js/lightslider.js"></script>
+  	<script src="{{ url_for('static', filename='/shop/js/Jquery.js') }}"></script>
+  	<script src="{{ url_for('static', filename='/shop/js/lightslider.js') }}"></script>
 	<script type="text/javascript">
 		 $(document).on('click','.search',function(){
         $('.search-bar').addClass('search-bar-active')

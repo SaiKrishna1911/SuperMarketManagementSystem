@@ -15,13 +15,13 @@
             align-items: center;
             min-height: 100vh;
             font-family: sans-serif; 
-            background: url(../static/images/66.png);
+            background: url(../static/images/1234.jpg);
             background-size: cover;
         }
 .btn-box
 {
    
-    margin-left: 45%;
+    margin-left: 38%;
     align-items: center;
 }
 button
@@ -45,6 +45,7 @@ button:hover
     font-color:#000;
     font-size: 20px;
     transition: 0.2s;
+    word-wrap: normal;
 }
 .total
 {
@@ -57,7 +58,7 @@ button:hover
     border-radius: 20px;
     cursor: pointer;
     background: transparent;
-    padding-right: 30px;
+    padding-right: 40px;
     align-items: right;
     font-weight: 10px solid;
 }
@@ -107,7 +108,6 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                 <th></th>
             </tr>
         </div>
-            <form ></form>
             {%for item in items%}
             <tr>
                 <td>{{item['name']}}<br></td>
@@ -119,10 +119,14 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 
             {% endfor %}
         </table>
+        
         <div class="btn-box">
         	<div class="total">Total : Rs.{{total}}</div>
+                    <a href="{{url_for('shop')}}">
+                    <button>Add more</button>
+                    </a>
                     <a href="{{url_for('place_order', totalamt=total)}}">
-                    <button type="submit">place order</button>
+                    <button>place order</button>
                     </a>
                 </div>
         

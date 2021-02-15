@@ -15,7 +15,7 @@
             align-items: center;
             min-height: 100vh;
             font-family: sans-serif; 
-            background: url(../static/images/66.png);
+            background: rgb(255, 145, 95);
             background-size: cover;
         }
 .btn-box
@@ -35,7 +35,6 @@ button
     border-radius: 30px;
     cursor: pointer;
     background: transparent;
-    margin-top: 15%;
     align-items: center;
     padding-right: 30px;
     }
@@ -70,6 +69,11 @@ button:hover
 {
     color: #fff;
 }
+.main
+{
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
 
 table { 
   
@@ -77,6 +81,7 @@ table {
   height: 50%;
   padding: 15px;
   border-collapse: collapse;
+  border: black;
 }
 th {
     height: 35px;
@@ -99,6 +104,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 </head>
     <body>
         {%for order in orders%}
+        <div class="main">
         <table style="width: 100%;">
             <tr>
                 <td>Order ID : {{order['id']}}</td><td></td><td></td>
@@ -109,7 +115,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                 <th>Unit Price</th>
                 <th>Quantity</th>
                 <th>Total Price</th>
-                <th>..</th>
+              
             </tr>
             {%for item in order['items']%}
             <tr>
@@ -117,7 +123,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                 <td>Rs.{{item["sale_rate"]}}</td>
                 <td>{{item['quantity']}}</td>
                 <td>Rs.{{item["sale_rate"]*item['quantity']}}</td>
-                <td><a href="{{url_for('remove_item_from_cart', id = item['id'])}}">Remove</a></td>
+                
             </tr>
             {% endfor %}
             <tr>
@@ -135,6 +141,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                     </a>
                 </div>
         <br>
+        </div>
         {% endfor %}
         
         

@@ -154,7 +154,7 @@
 				<img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
 				<nav>
 					<ul>
-						<li><a href="#">Home</a></li>
+						<li><a href="{{url_for('home')}}">Home</a></li>
 						<li><a href="{{url_for('explore')}}">Services</a></li>
 						<li><a href="{{url_for('login')}}">login</a></li>
 					</ul>
@@ -179,13 +179,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="side-bar">
-			<img src="{{ url_for('static', filename='images/icon.png') }}" class="logo-icon">
-			<div class="social">
-				<img src="{{ url_for('static', filename='images/fb.png') }}">
-				<img src="{{ url_for('static', filename='images/ig.png') }}">
-				<img src="{{ url_for('static', filename='images/tw.png') }}">
-			</div>
+		
 
 </body>
 

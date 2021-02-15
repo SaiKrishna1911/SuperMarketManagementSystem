@@ -3,13 +3,24 @@ from functools import wraps
 from flask import g, request, redirect, url_for, session, flash
 
 
+# def dbConnection():
+#     connection = pymysql.connect(
+#         host="akshayvn.heliohost.us",
+#         user="akshayvn_super",
+#         password="dbmsmini",
+#         database="akshayvn_dbms_mini_project",
+#         charset='utf8mb4',
+#         cursorclass=pymysql.cursors.DictCursor,
+#         autocommit=True,
+#     )
+#     return connection
+
 def dbConnection():
     connection = pymysql.connect(
-        host="akshayvn.heliohost.us",
-        user="akshayvn_super",
-        password="dbmsmini",
-        database="akshayvn_dbms_mini_project",
-        charset='utf8mb4',
+        host="localhost",
+        user="root",
+        password="akshay00000",
+        database="supermarket",
         cursorclass=pymysql.cursors.DictCursor,
         autocommit=True,
     )

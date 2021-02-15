@@ -270,6 +270,9 @@ def previous_cart():
             """
         )
         order['items'] = cur.fetchall()
+        total = 0.0
+        for item in cart:
+            total = total + item['sale_rate'] * item['quantity']
     return render_template("previous_cart.html", orders=orders)
 
 
@@ -295,6 +298,7 @@ def add_to_cart():
 
 
 @app.route("/explore")
+@login_required
 def explore():
     return render_template("explore.html")
 

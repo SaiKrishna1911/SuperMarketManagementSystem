@@ -30,8 +30,8 @@ button
     font-size: 15px;
     border-radius: 5px;
     cursor: pointer;
-    align-self: center;
-    margin-top: 5px;
+    float: right;
+    margin: 5px;
 }
 button:hover
 {
@@ -90,6 +90,7 @@ table {
   
 }
 th {
+    
     height: 35px;
     background-color: #100e16;
         color: white;
@@ -118,7 +119,7 @@ tr:nth-child(odd) {background-color: rgb(255, 255, 255);}
                 <td>Order Date : {{order['orderDate']}}</td>
             </tr>
             <tr>
-                <th>Item</th>
+                <th style="width: 40%;">Item</th>
                 <th>Unit Price</th>
                 <th>Quantity</th>
                 <th>Total Price</th>

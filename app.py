@@ -147,6 +147,8 @@ def home_admin():
 @app.route("/shop", methods=['GET', 'POST'])
 @app.route("/shop/<category>", methods=['GET', 'POST'])
 def shop(category='Items'):
+    
+        
     addedItem = request.args.get('addedItem')
     addedItemqty = request.args.get('qty')
     if not addedItemqty:
@@ -173,13 +175,19 @@ def shop(category='Items'):
     cartsize = len(cart)
     print(cartsize)
     # cur.execute("SELECT * from Items")
-    cur.execute(
-        f"""SELECT *
-        FROM {category}
-        LEFT JOIN(SELECT * FROM Cart WHERE customerId=(SELECT id FROM Users WHERE email='{email}')) AS T
-        ON {category}.id=T.itemId;
-        """)
-    items = cur.fetchall()
+    if 'search' in request.args:
+        name = request.args['search']
+        cur.execute(
+            f"SELECT * FROM Items WHERE UPPER(name) LIKE UPPER('%{name}%')")
+        items = cur.fetchall()
+    else:
+        cur.execute(
+            f"""SELECT *
+            FROM {category}
+            LEFT JOIN(SELECT * FROM Cart WHERE customerId=(SELECT id FROM Users WHERE email='{email}')) AS T
+            ON {category}.id=T.itemId;
+            """)
+        items = cur.fetchall()
     return render_template("shop.html", items=items, cartsize=cartsize, category=category)
 
 
@@ -270,9 +278,9 @@ def previous_cart():
             """
         )
         order['items'] = cur.fetchall()
-        total = 0.0
-        for item in cart:
-            total = total + item['sale_rate'] * item['quantity']
+        # total = 0.0
+        # for item in cart:
+        #     total = total + item['sale_rate'] * item['quantity']
     return render_template("previous_cart.html", orders=orders)
 
 
@@ -413,6 +421,76 @@ def edit_item():
                            "/" + f"{item_id}.png")
 
     return render_template("edit_item.html", categories=categories, brands=brands, items=items)
+
+@app.route("/admin/orders")
+@admin_login_required
+def orders():
+    return render_template("orders.html")
+
+
+
+@app.route("/admin/orders/delivered")
+@admin_login_required
+def delivered_orders():
+    cur.execute(
+        f"""
+        SELECT * FROM Orders
+        WHERE status = 1
+        ORDER BY orderDate DESC;
+        """
+    )
+    orders = cur.fetchall()
+    for order in orders:
+        cur.execute(
+            f"""
+            SELECT * FROM OrderDetails
+            LEFT JOIN Items
+            ON OrderDetails.itemId = Items.id
+            WHERE OrderDetails.orderId = {order['id']}
+            """
+        )
+        order['items'] = cur.fetchall()
+    return render_template("delivered_orders.html", orders=orders)
+
+
+
+@app.route("/add_to_delivered", methods=['GET', 'POST'])
+def add_to_delivered():
+    orderId = request.args.get('orderId')
+    cur.execute(
+        f"""
+        UPDATE Orders
+        SET status = 1
+        WHERE id = {orderId};
+        """
+    )
+    return redirect(url_for("pending_orders"))
+
+
+
+@app.route("/admin/orders/pending")
+@admin_login_required
+def pending_orders():
+    cur.execute(
+        f"""
+        SELECT * FROM Orders
+        WHERE status = 0
+        ORDER BY orderDate DESC;
+        """
+    )
+    orders = cur.fetchall()
+    for order in orders:
+        cur.execute(
+            f"""
+            SELECT * FROM OrderDetails
+            LEFT JOIN Items
+            ON OrderDetails.itemId = Items.id
+            WHERE OrderDetails.orderId = {order['id']}
+            """
+        )
+        order['items'] = cur.fetchall()
+    return render_template("pending_orders.html", orders=orders)
+
 
 
 @app.route("/contact_us")

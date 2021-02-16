@@ -110,6 +110,7 @@ tr:nth-child(odd) {background-color: rgb(255, 255, 255);}
       </style>  
 </head>
     <body>
+        <a href="{{url_for('orders')}}"><button type="button">Go back</button></a><br><br>
         {%for order in orders%}
         <div class="main">
         <table style="width: 100%;">
@@ -140,21 +141,6 @@ tr:nth-child(odd) {background-color: rgb(255, 255, 255);}
                 <td>
                 
                     <div class="total"><b>Total : Rs.{{order['amount']}}</b></div>
-               
-                </td>
-                
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                
-                    <div class="btn-box">
-                    <a href="{{url_for('add_to_cart',orderId=order['id'])}}">
-                    <button type="submit"> Re-Order</button>
-                    </a>
-                </div>
                
                 </td>
                 
